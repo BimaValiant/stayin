@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Gambar Header Biru (Tingginya gw kurangin jadi 200dp biar lega) -->
+    <ImageView
+        android:id="@+id/ivHeaderRegister"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/register" />
+
+    <!-- Card Putih Bawah -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHeaderRegister"
+        android:layout_marginTop="-30dp">
+
+        <!-- INI KUNCI FIX-NYA: ScrollView biar bisa digeser ke bawah -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Buat Akun Baru"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Temukan Pengalaman\nMenginap Terbaikmu!"
+                    android:textAlignment="center"
+                    android:textColor="#424242"
+                    android:textSize="14sp" />
+
+                <!-- Input Fields -->
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="Full name"
+                    android:padding="12dp"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="Valid email"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="Phone number"
+                    android:inputType="phone"
+                    android:padding="12dp"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="Strong Password"
+                    android:inputType="textPassword"
+                    android:padding="12dp"
+                    android:textSize="14sp" />
+
+                <!-- Checkbox Syarat & Ketentuan -->
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Saya setuju dengan Syarat &amp; Ketentuan"
+                    android:textColor="#424242"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:backgroundTint="#1877F2"
+                    android:text="Daftar Sekarang"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sudah Punya Akun? "
+                        android:textColor="#424242"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Masuk di sini"
+                        android:textColor="#1877F2"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

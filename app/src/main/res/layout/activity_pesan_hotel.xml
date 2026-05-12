@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- Header & Tombol Back -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_menu_revert"
+            android:backgroundTint="#1877F2"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pesan Hotel"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih tanggal check-in dan check-out"
+            android:textColor="#808080"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Bagian Check-In -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check-In"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:drawable/editbox_background"
+                android:text="19 Februari 1945"
+                android:textColor="#000000"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:drawableStart="@android:drawable/ic_menu_today"
+                android:drawablePadding="12dp"
+                android:layout_marginBottom="12dp"/>
+
+            <CalendarView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Bagian Check-Out -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check-Out"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:drawable/editbox_background"
+                android:text="21 Februari 1945"
+                android:textColor="#000000"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:drawableStart="@android:drawable/ic_menu_today"
+                android:drawablePadding="12dp"
+                android:layout_marginBottom="12dp"/>
+
+            <CalendarView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:layout_marginBottom="24dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Tombol Lanjut ke Pembayaran (Ngunci di bawah) -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="24dp"
+        android:backgroundTint="#1877F2"
+        android:text="Lanjut ke Pembayaran"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

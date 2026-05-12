@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Area Konten Utama -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fillViewport="true"> <!-- INI KUNCI 1: Biar isi scrollview bisa melar penuhi layar -->
+
+        <!-- INI KUNCI 2: match_parent biar bungkusannya setinggi layar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Header Biru (Background) -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/homeatas" />
+
+
+            <!-- Card Putih Melengkung -->
+            <!-- INI KUNCI 3: height 0dp & weight 1 bikin kotak putih ini ditarik mentok ke bawah -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="-40dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Judul Pilih Kota -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_mylocation"
+                        app:tint="#1877F2"
+                        android:layout_marginEnd="12dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih Kota Tujuan"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Search Bar -->
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:hint="Cari Kota di Indonesia..."
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:drawableEnd="@android:drawable/ic_menu_search"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="24dp"/>
+
+                <!-- Grid Kota -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:useDefaultMargins="true"
+                    android:alignmentMode="alignMargins">
+
+                    <!-- Kota 1: Purwokerto -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:layout_margin="8dp"
+                        android:background="@android:drawable/dialog_holo_light_frame"
+                        android:padding="2dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/purwokertohome" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Purwokerto"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="8dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Jawa Tengah"
+                            android:textSize="12sp"
+                            android:textColor="#808080"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginBottom="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Kota 2: Jakarta -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:layout_margin="8dp"
+                        android:background="@android:drawable/dialog_holo_light_frame"
+                        android:padding="2dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/jakartahome" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Jakarta"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="8dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DKI Jakarta"
+                            android:textSize="12sp"
+                            android:textColor="#808080"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginBottom="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Kota 3: Bandung (Biar menuhin layar ke bawah) -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:layout_margin="8dp"
+                        android:background="@android:drawable/dialog_holo_light_frame"
+                        android:padding="2dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/bandunghome" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bandung"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="8dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Jawa Barat"
+                            android:textSize="12sp"
+                            android:textColor="#808080"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginBottom="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Kota 4: Solo -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:layout_margin="8dp"
+                        android:background="@android:drawable/dialog_holo_light_frame"
+                        android:padding="2dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/solo" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Solo"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="8dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Jawa Tengah"
+                            android:textSize="12sp"
+                            android:textColor="#808080"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginBottom="8dp"/>
+                    </LinearLayout>
+
+                </GridLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#1877F2"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@android:drawable/ic_menu_compass" app:tint="#FFFFFF"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="#FFFFFF" android:textSize="12sp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@android:drawable/ic_menu_agenda" app:tint="#99C2FF"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Booking" android:textColor="#99C2FF" android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@android:drawable/ic_menu_myplaces" app:tint="#99C2FF"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="#99C2FF" android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
