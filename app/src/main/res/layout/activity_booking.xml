@@ -121,24 +121,27 @@
                     </LinearLayout>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/BtnCancelled"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="#FF3B30"
+                        app:cardCornerRadius="8dp"
                         app:cardElevation="0dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="1dp"
                             android:background="#FFFFFF"
                             android:gravity="center">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Batalkan Booking"
                                 android:textColor="#FF3B30"
-                                android:textStyle="bold"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -237,19 +240,22 @@
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="#FF3B30"
                         app:cardElevation="0dp">
+
                         <LinearLayout
+                            android:id="@+id/BtnCanelled"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="1dp"
                             android:background="#FFFFFF"
                             android:gravity="center">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Batalkan Booking"
                                 android:textColor="#FF3B30"
-                                android:textStyle="bold"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -272,7 +278,13 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@android:drawable/ic_menu_compass" app:tint="#99C2FF"/>
+
+            <ImageView
+                android:id="@+id/BtnHome"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@android:drawable/ic_menu_compass"
+                app:tint="#99C2FF" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="#99C2FF" android:textSize="12sp"/>
         </LinearLayout>
 
@@ -292,7 +304,13 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-            <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@android:drawable/ic_menu_myplaces" app:tint="#99C2FF"/>
+
+            <ImageView
+                android:id="@+id/BtnProfile"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="#99C2FF" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="#99C2FF" android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>

@@ -120,11 +120,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="StayIn Alun Alun\nPurwokerto"
-                            android:textStyle="bold"
+                            android:layout_marginBottom="4dp"
+                            android:text="StayIn Senayan"
                             android:textColor="#000000"
                             android:textSize="16sp"
-                            android:layout_marginBottom="4dp"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -191,11 +191,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="StayIn GOR Purwokerto"
-                            android:textStyle="bold"
+                            android:layout_marginBottom="4dp"
+                            android:text="StayIn Kelapa Gading"
                             android:textColor="#000000"
                             android:textSize="16sp"
-                            android:layout_marginBottom="4dp"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"

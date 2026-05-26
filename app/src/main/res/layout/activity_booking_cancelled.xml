@@ -182,15 +182,16 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/BtnHome"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#1877F2"
             android:text="Kembali Ke Home"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#1877F2"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>
