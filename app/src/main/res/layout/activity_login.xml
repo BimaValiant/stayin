@@ -78,6 +78,7 @@
             android:textSize="14sp" />
 
         <Button
+            android:id="@+id/BtnMasuk"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:backgroundTint="#1877F2"
