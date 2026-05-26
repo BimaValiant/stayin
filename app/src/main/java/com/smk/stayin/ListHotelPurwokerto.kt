@@ -9,7 +9,7 @@ class ListHotelPurwokerto : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_hotel) // Sesuaikan dengan nama XML list hotelmu
+        setContentView(R.layout.activity_list_hotel_jakarta) // Sesuaikan dengan nama XML list hotelmu
 
         // 1. Kenalan dengan tombol Hotel Alun-Alun
         // Ganti 'LinearLayout' menjadi 'CardView' jika di XML kamu memakai CardView
