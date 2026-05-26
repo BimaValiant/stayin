@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <!-- Gambar Header Biru (Tingginya gw kurangin jadi 200dp biar lega) -->
     <ImageView
         android:id="@+id/ivHeaderRegister"
         android:layout_width="match_parent"
@@ -13,7 +12,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/register" />
 
-    <!-- Card Putih Bawah -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -23,7 +21,6 @@
         app:layout_constraintTop_toBottomOf="@+id/ivHeaderRegister"
         android:layout_marginTop="-30dp">
 
-        <!-- INI KUNCI FIX-NYA: ScrollView biar bisa digeser ke bawah -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,8 +52,8 @@
                     android:textColor="#424242"
                     android:textSize="14sp" />
 
-                <!-- Input Fields -->
                 <EditText
+                    android:id="@+id/etNama"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="12dp"
@@ -66,6 +63,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="12dp"
@@ -76,6 +74,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etPhone"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="12dp"
@@ -86,6 +85,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="16dp"
@@ -95,8 +95,8 @@
                     android:padding="12dp"
                     android:textSize="14sp" />
 
-                <!-- Checkbox Syarat & Ketentuan -->
                 <CheckBox
+                    android:id="@+id/cbSyarat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
