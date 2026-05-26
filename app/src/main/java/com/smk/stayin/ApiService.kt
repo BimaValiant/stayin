@@ -20,4 +20,12 @@ interface ApiService {
         @Field("phone") phone: String,
         @Field("password") password: String
     ): Call<ResponseBody>
+
+    // -- fungsi login
+    @FormUrlEncoded
+    @POST("login")
+    fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Call<ResponseBody>
 }
