@@ -1,7 +1,9 @@
 package com.smk.stayin
 
+import android.content.Intent // Tambahan import untuk Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button // Tambahan import untuk Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,6 +24,23 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // --- TAMBAHKAN KODE TOMBOL DI SINI ---
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
+
+        btnLogin.setOnClickListener {
+            // Pastikan Anda sudah membuat file LoginActivity.kt
+            val intentMasuk = Intent(this, LoginActivity::class.java)
+            startActivity(intentMasuk)
+        }
+
+        btnRegister.setOnClickListener {
+            // Pastikan Anda sudah membuat file RegisterActivity.kt
+            val intentDaftar = Intent(this, RegisterActivity::class.java)
+            startActivity(intentDaftar)
+        }
+        // -------------------------------------
 
         // PANGGIL FUNGSI TEST API DI SINI
         testKoneksiLaravel()
