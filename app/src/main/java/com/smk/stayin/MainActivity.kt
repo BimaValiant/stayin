@@ -1,13 +1,10 @@
 package com.smk.stayin
 
-import android.content.Intent // Tambahan import untuk Intent
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button // Tambahan import untuk Button
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,33 +13,24 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        // Pasang layout welcome
         setContentView(R.layout.activity_welcome)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        // --- TAMBAHKAN KODE TOMBOL DI SINI ---
+        // Tombol login dan register langsung beraksi
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
 
         btnLogin.setOnClickListener {
-            // Pastikan Anda sudah membuat file LoginActivity.kt
             val intentMasuk = Intent(this, LoginActivity::class.java)
             startActivity(intentMasuk)
         }
 
         btnRegister.setOnClickListener {
-            // Pastikan Anda sudah membuat file RegisterActivity.kt
             val intentDaftar = Intent(this, RegisterActivity::class.java)
             startActivity(intentDaftar)
         }
-        // -------------------------------------
 
-        // PANGGIL FUNGSI TEST API DI SINI
+        // Jalankan test API Laravel
         testKoneksiLaravel()
     }
 
@@ -51,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     val jsonResponse = response.body()?.string()
-                    // Kalau berhasil, datanya muncul di Logcat dengan filter: HASIL_LARAVEL
                     Log.d("HASIL_LARAVEL", "Sukses! Data dari Laravel: $jsonResponse")
                 } else {
                     Log.e("HASIL_LARAVEL", "Gagal merespon: ${response.code()}")
@@ -59,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                // Kalau error/RTO, detailnya muncul di sini
                 Log.e("HASIL_LARAVEL", "Error Koneksi: ${t.message}")
             }
         })
