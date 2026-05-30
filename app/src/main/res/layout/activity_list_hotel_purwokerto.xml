@@ -84,7 +84,7 @@
 
                 <!-- Card Hotel 1 (Ditambah elevation & margin biar shadow keluar) -->
                 <LinearLayout
-                    android:id="@+id/BtnHotelAlunAlun"
+                    android:id="@+id/BtnHotelGor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"

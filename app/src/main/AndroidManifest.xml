@@ -26,6 +26,14 @@
         <activity android:name=".LoginActivity" android:exported="false" />
         <activity android:name=".RegisterActivity" android:exported="false" />
 
+        <activity android:name=".ListHotelPurwokerto" android:exported="false" />
+        <activity android:name=".ListHotelJakartaActivity" android:exported="false" />
+
+        <activity android:name=".PesanHotelActivity" android:exported="false" />
+        <activity android:name=".BookingActivity" android:exported="false" />
+
+        <activity android:name=".ProfileActivity" android:exported="false" />
+
     </application>
 
 </manifest>
