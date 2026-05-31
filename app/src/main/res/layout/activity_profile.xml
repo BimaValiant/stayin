@@ -54,6 +54,7 @@
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"/>
                     <TextView
+                        android:id="@+id/tvNamaLengkap"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Budi Santoso"
@@ -80,6 +81,7 @@
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"/>
                     <TextView
+                        android:id="@+id/tvEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="BudiSantoKeceAbiez@gmail.com"
@@ -106,6 +108,7 @@
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"/>
                     <TextView
+                        android:id="@+id/tvPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="+62 852 2222 2222"
@@ -133,7 +136,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="****5AbC"
+                        android:text="********"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"/>

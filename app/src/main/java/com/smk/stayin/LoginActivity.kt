@@ -52,10 +52,21 @@ class LoginActivity : AppCompatActivity() {
                     val jsonRespon = response.body()?.string()
                     Log.d("LOGIN_SUCCESS", "Respon Token: $jsonRespon")
 
+                    // 1. Ambil token dari JSON response Laravel
+                    val jsonObject = org.json.JSONObject(jsonRespon)
+                    val dataObject = jsonObject.getJSONObject("data")
+                    val token = dataObject.getString("token")
+
+                    // 2. Simpan token ke memori internal HP (SharedPreferences)
+                    val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
+                    val editor = sharedPref.edit()
+                    editor.putString("auth_token", "Bearer $token")
+                    editor.apply()
+
                     Toast.makeText(this@LoginActivity, "Login Berhasil! Welcome", Toast.LENGTH_SHORT).show()
 
-                    // Pindah ke Dashboard / Home Activity setelah login sukses
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java) // atau MainActivity sesuai dashboard lu
+                    // 3. Pindah ke Dashboard utama
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
