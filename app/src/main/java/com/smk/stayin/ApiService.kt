@@ -22,6 +22,15 @@ interface ApiService {
         @Field("password") password: String
     ): Call<ResponseBody>
 
+    //untuk lokasi
+    @FormUrlEncoded
+    @POST("user/location")
+    fun kirimLokasiUser(
+        @Header("Authorization") token: String, // Untuk mengirim token "Bearer ..."
+        @Field("latitude") lat: Double,
+        @Field("longitude") lng: Double
+    ): Call<ResponseBody>
+
     // -- fungsi login
     @FormUrlEncoded
     @POST("login")
