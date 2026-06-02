@@ -355,7 +355,6 @@
             <View
                 android:layout_width="4dp"
                 android:layout_height="4dp"
-                android:background="@drawable/editbox_background"
                 android:backgroundTint="#1877F2"
                 android:layout_marginTop="2dp"/>
         </LinearLayout>

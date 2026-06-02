@@ -138,7 +138,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/editbox_background"
                                 android:backgroundTint="#F0F4FF"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="6dp"
@@ -273,7 +272,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/editbox_background"
                                 android:backgroundTint="#F0F4FF"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="6dp"
