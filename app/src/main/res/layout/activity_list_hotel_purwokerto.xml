@@ -3,230 +3,371 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F7FA"> <!-- Background abu-abu terang -->
 
-    <!-- Gambar Header Kota (Tinggi disesuaikan) -->
+    <!-- 1. HEADER GAMBAR KOTA (ID AMAN) -->
     <ImageView
         android:id="@+id/ivHeaderCity"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="270dp"
         android:scaleType="centerCrop"
-        android:background="#1877F2"
+        android:src="@drawable/register"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Tombol Back (Dibikin warna putih biar kelihatan di atas biru) -->
+    <!-- Overlay Gelap Halus -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#73001A33"
+        app:layout_constraintBottom_toBottomOf="@id/ivHeaderCity"
+        app:layout_constraintTop_toTopOf="@id/ivHeaderCity" />
+
+    <!-- 2. TOMBOL BACK (ID AMAN) -->
     <ImageView
         android:id="@+id/BtnBack"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_margin="24dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="10dp"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#FFFFFF" />
 
-    <!-- Teks Bawah (Subtitle) dipaku ke bawah gambar biru -->
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="40dp"
-        android:text="Tentukan yang terbaik Purwokerto"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivHeaderCity"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Teks Atas (Judul Kota) dipaku di atas Subtitle -->
+    <!-- 3. TEKS JUDUL KOTA (ID AMAN) -->
     <TextView
         android:id="@+id/tvCityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="16dp"
         android:text="Purwokerto"
         android:textColor="#FFFFFF"
-        android:textSize="28sp"
+        android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnBack" />
 
-    <!-- Area Putih List Hotel -->
-    <LinearLayout
+    <!-- TEKS SUBTITLE (ID AMAN) -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:text="Tentukan yang terbaik di Purwokerto"
+        android:textColor="#E0FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCityName" />
+
+    <!-- 4. AREA LIST HOTEL (Gaya Numpuk Bandung) -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="-20dp"
-        android:background="#FFFFFF"
-        android:orientation="vertical"
-        android:padding="24dp"
+        android:layout_marginTop="-45dp"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:paddingBottom="40dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivHeaderCity">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2 hotel tersedia"
-            android:textColor="#808080"
-            android:textSize="14sp"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
+                android:layout_marginBottom="16dp"
+                android:text="2 hotel tersedia"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-                <!-- Card Hotel 1 (Ditambah elevation & margin biar shadow keluar) -->
+            <!-- ========================================= -->
+            <!-- CARD HOTEL 1 (StayIn Alun Alun) -->
+            <!-- ========================================= -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <!-- ID AMAN DITARUH DI SINI -->
                 <LinearLayout
                     android:id="@+id/BtnHotelGor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#FFFFFF"
-                    android:elevation="3dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical">
 
+                    <!-- Gambar Hotel -->
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="130dp"
-                        android:background="#E0E0E0"
-                        android:scaleType="centerCrop" />
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="#E3EDFF"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#A8C7FA" />
 
+                    <!-- Area Detail Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:background="#1877F2"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="4dp"
-                            android:text="★ 4.6"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- Badge Kategori -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/editbox_background"
+                                android:backgroundTint="#F0F4FF"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="6dp"
+                                android:text="City Center"
+                                android:textColor="#1877F2"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <!-- Rating Bintang -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="⭐ 4.6"
+                                android:textColor="#FFB300"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- Nama & Lokasi -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:text="StayIn Alun Alun Purwokerto"
+                            android:textColor="#1A1A1A"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:text="StayIn Alun Alun\nPurwokerto"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="6dp"
+                            android:text="📍 Jl. Jend. Soedirman, Pereng, Sokanegara"
+                            android:textColor="#757575"
+                            android:textSize="13sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Jl. Jend. Soedirman, Pereng, Sokanegara, Kec. Purwokerto Tim."
-                            android:textColor="#808080"
-                            android:textSize="10sp" />
+                        <!-- Garis Pembatas -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginVertical="16dp"
+                            android:background="#F0F0F0" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <!-- Area Harga & Tombol -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Start From"
-                            android:textColor="#000000"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 300.000"
-                            android:textColor="#1877F2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mulai dari"
+                                    android:textColor="#9E9E9E"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp 300.000"
+                                    android:textColor="#1877F2"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <!-- Tombol ini cuma visual, klik aslinya diatur oleh BtnHotelGor -->
+                            <Button
+                                android:layout_width="100dp"
+                                android:layout_height="48dp"
+                                android:backgroundTint="#1877F2"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:text="Pesan"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                app:cornerRadius="12dp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-                <!-- Card Hotel 2 -->
+            <!-- ========================================= -->
+            <!-- CARD HOTEL 2 (StayIn GOR) -->
+            <!-- ========================================= -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <!-- ID AMAN DITARUH DI SINI -->
                 <LinearLayout
                     android:id="@+id/BtnHotelAlunAlun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="#FFFFFF"
-                    android:elevation="3dp"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="130dp"
-                        android:background="#E0E0E0"
-                        android:scaleType="centerCrop" />
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="#E3EDFF"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#A8C7FA" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/editbox_background"
+                                android:backgroundTint="#F0F4FF"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="6dp"
+                                android:text="Strategic"
+                                android:textColor="#1877F2"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="⭐ 4.3"
+                                android:textColor="#FFB300"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:background="#1877F2"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="4dp"
-                            android:text="★ 4.3"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
+                            android:layout_marginTop="14dp"
                             android:text="StayIn GOR Purwokerto"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
+                            android:textColor="#1A1A1A"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Jl. Prof. Dr. Suharso, Mangunjaya, Purwokerto Lor, Kec. Purwokerto Tim."
-                            android:textColor="#808080"
-                            android:textSize="10sp" />
+                            android:layout_marginTop="6dp"
+                            android:text="📍 Jl. Prof. Dr. Suharso, Mangunjaya"
+                            android:textColor="#757575"
+                            android:textSize="13sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Start From"
-                            android:textColor="#000000"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginVertical="16dp"
+                            android:background="#F0F0F0" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Rp 350.000"
-                            android:textColor="#1877F2"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mulai dari"
+                                    android:textColor="#9E9E9E"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rp 350.000"
+                                    android:textColor="#1877F2"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <Button
+                                android:layout_width="100dp"
+                                android:layout_height="48dp"
+                                android:backgroundTint="#1877F2"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:text="Pesan"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                app:cornerRadius="12dp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

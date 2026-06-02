@@ -3,34 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FA">
+    android:background="#F5F7FA"> <!-- Background abu-abu terang biar Card putih lebih menonjol -->
 
     <!-- 1. HEADER GAMBAR KOTA -->
     <ImageView
-        android:id="@+id/ivHeaderCity"
+        android:id="@+id/ivHeaderBandung"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="270dp"
         android:scaleType="centerCrop"
         android:src="@drawable/register"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Overlay Gelap (Biar teks selalu kebaca jelas) -->
+    <!-- Overlay Gelap (Biar teks putih tetep kebaca walau background fotonya terang) -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#80001A33"
-        app:layout_constraintBottom_toBottomOf="@id/ivHeaderCity"
-        app:layout_constraintTop_toTopOf="@id/ivHeaderCity" />
+        android:background="#73001A33"
+        app:layout_constraintBottom_toBottomOf="@id/ivHeaderBandung"
+        app:layout_constraintTop_toTopOf="@id/ivHeaderBandung" />
 
-    <!-- 2. TOMBOL BACK (ID UDAH DITAMBAHIN BIAR GAK ERROR) -->
+    <!-- 2. TOMBOL BACK (Kiri Atas) -->
     <ImageView
-        android:id="@+id/BtnBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/btnBack"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
+        android:padding="10dp"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,55 +38,41 @@
 
     <!-- 3. TEKS JUDUL KOTA -->
     <TextView
-        android:id="@+id/tvCityName"
+        android:id="@+id/tvTitleCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:text="Jakarta"
+        android:layout_marginTop="16dp"
+        android:text="Bandung"
         android:textColor="#FFFFFF"
-        android:textSize="32sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BtnBack" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
-    <!-- 4. TEKS SUBTITLE -->
     <TextView
-        android:id="@+id/tvSubtitle"
+        android:id="@+id/tvSubtitleCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
-        android:text="Tentukan yang terbaik di Jakarta"
+        android:text="Temukan cozy vibes di Kota Kembang"
         android:textColor="#E0FFFFFF"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCityName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleCity" />
 
-    <!-- 5. INFO JUMLAH HOTEL (Dipindah ke atas biar elegan) -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="2 hotel tersedia"
-        android:textColor="#B3FFFFFF"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
-
-    <!-- 6. AREA LIST HOTEL -->
+    <!-- 4. AREA LIST HOTEL (Dikunci ke bawah gambar Header, bukan ke Teks lagi) -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-45dp"
         android:background="@android:color/transparent"
         android:clipToPadding="false"
         android:paddingBottom="40dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivHeaderCity">
+        app:layout_constraintTop_toBottomOf="@+id/ivHeaderBandung">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,7 +81,7 @@
             android:paddingHorizontal="20dp">
 
             <!-- ========================================= -->
-            <!-- CARD HOTEL 1 (StayIn Senayan) -->
+            <!-- CARD HOTEL 1 -->
             <!-- ========================================= -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -103,14 +89,11 @@
                 android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"> <!-- Shadow diperhalus biar kelihatan lebih modern -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:orientation="vertical">
 
                     <!-- Gambar Hotel -->
@@ -135,6 +118,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
+                            <!-- Badge Kategori -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -142,7 +126,7 @@
                                 android:backgroundTint="#F0F4FF"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="6dp"
-                                android:text="Premium"
+                                android:text="Luxury"
                                 android:textColor="#1877F2"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -152,10 +136,11 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1" />
 
+                            <!-- Rating Bintang -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="⭐ 4.6"
+                                android:text="⭐ 4.8"
                                 android:textColor="#FFB300"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -166,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
-                            android:text="StayIn Senayan"
+                            android:text="The Trans Luxury Hotel"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -175,16 +160,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="📍 Jl. Jend. Sudirman, Senayan, Jakarta Selatan"
+                            android:text="📍 Jl. Gatot Subroto, Cibangkong"
                             android:textColor="#757575"
                             android:textSize="13sp" />
 
+                        <!-- Garis Pembatas Halus -->
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginVertical="16dp"
                             android:background="#F0F0F0" />
 
+                        <!-- Area Harga & Tombol -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -207,7 +194,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Rp 300.000"
+                                    android:text="Rp 1.250.000"
                                     android:textColor="#1877F2"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -217,8 +204,6 @@
                                 android:layout_width="100dp"
                                 android:layout_height="48dp"
                                 android:backgroundTint="#1877F2"
-                                android:clickable="false"
-                                android:focusable="false"
                                 android:text="Pesan"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -230,25 +215,20 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- ========================================= -->
-            <!-- CARD HOTEL 2 (StayIn Kelapa Gading) -->
-            <!-- ========================================= -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"> <!-- Shadow diperhalus biar kelihatan lebih modern -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:orientation="vertical">
 
+                    <!-- Gambar Hotel -->
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
@@ -257,6 +237,7 @@
                         android:src="@android:drawable/ic_menu_gallery"
                         app:tint="#A8C7FA" />
 
+                    <!-- Area Detail Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -269,6 +250,7 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
+                            <!-- Badge Kategori -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -276,7 +258,7 @@
                                 android:backgroundTint="#F0F4FF"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="6dp"
-                                android:text="City Center"
+                                android:text="Luxury"
                                 android:textColor="#1877F2"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -286,20 +268,22 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1" />
 
+                            <!-- Rating Bintang -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="⭐ 4.3"
+                                android:text="⭐ 4.8"
                                 android:textColor="#FFB300"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
+                        <!-- Nama & Lokasi -->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
-                            android:text="StayIn Kelapa Gading"
+                            android:text="The Trans Luxury Hotel"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -308,16 +292,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="📍 Jl. Boulevard Raya, Kelapa Gading, Jakarta Utara"
+                            android:text="📍 Jl. Gatot Subroto, Cibangkong"
                             android:textColor="#757575"
                             android:textSize="13sp" />
 
+                        <!-- Garis Pembatas Halus -->
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginVertical="16dp"
                             android:background="#F0F0F0" />
 
+                        <!-- Area Harga & Tombol -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -340,7 +326,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Rp 350.000"
+                                    android:text="Rp 1.250.000"
                                     android:textColor="#1877F2"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -350,8 +336,6 @@
                                 android:layout_width="100dp"
                                 android:layout_height="48dp"
                                 android:backgroundTint="#1877F2"
-                                android:clickable="false"
-                                android:focusable="false"
                                 android:text="Pesan"
                                 android:textAllCaps="false"
                                 android:textColor="#FFFFFF"
@@ -362,7 +346,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

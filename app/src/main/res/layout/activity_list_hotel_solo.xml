@@ -14,7 +14,7 @@
         android:src="@drawable/register"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Overlay Gelap (Biar teks selalu kebaca jelas) -->
+    <!-- Overlay Gelap -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="@id/ivHeaderCity"
         app:layout_constraintTop_toTopOf="@id/ivHeaderCity" />
 
-    <!-- 2. TOMBOL BACK (ID UDAH DITAMBAHIN BIAR GAK ERROR) -->
+    <!-- 2. TOMBOL BACK -->
     <ImageView
         android:id="@+id/BtnBack"
         android:layout_width="40dp"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        android:text="Jakarta"
+        android:text="Solo"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -57,13 +57,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
-        android:text="Tentukan yang terbaik di Jakarta"
+        android:text="Tentukan yang terbaik di Solo"
         android:textColor="#E0FFFFFF"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCityName" />
 
-    <!-- 5. INFO JUMLAH HOTEL (Dipindah ke atas biar elegan) -->
+    <!-- 5. INFO JUMLAH HOTEL -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             android:paddingHorizontal="20dp">
 
             <!-- ========================================= -->
-            <!-- CARD HOTEL 1 (StayIn Senayan) -->
+            <!-- CARD HOTEL 1 (StayIn Slamet Riyadi) -->
             <!-- ========================================= -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -113,7 +113,6 @@
                     android:focusable="true"
                     android:orientation="vertical">
 
-                    <!-- Gambar Hotel -->
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
@@ -122,7 +121,6 @@
                         android:src="@android:drawable/ic_menu_gallery"
                         app:tint="#A8C7FA" />
 
-                    <!-- Area Detail Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -142,7 +140,7 @@
                                 android:backgroundTint="#F0F4FF"
                                 android:paddingHorizontal="12dp"
                                 android:paddingVertical="6dp"
-                                android:text="Premium"
+                                android:text="Heritage"
                                 android:textColor="#1877F2"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -155,18 +153,17 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="⭐ 4.6"
+                                android:text="⭐ 4.7"
                                 android:textColor="#FFB300"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
-                        <!-- Nama & Lokasi -->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
-                            android:text="StayIn Senayan"
+                            android:text="StayIn Slamet Riyadi"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -175,7 +172,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="📍 Jl. Jend. Sudirman, Senayan, Jakarta Selatan"
+                            android:text="📍 Jl. Slamet Riyadi, Keprabon, Kota Surakarta"
                             android:textColor="#757575"
                             android:textSize="13sp" />
 
@@ -207,7 +204,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Rp 300.000"
+                                    android:text="Rp 250.000"
                                     android:textColor="#1877F2"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -231,7 +228,7 @@
             </androidx.cardview.widget.CardView>
 
             <!-- ========================================= -->
-            <!-- CARD HOTEL 2 (StayIn Kelapa Gading) -->
+            <!-- CARD HOTEL 2 (StayIn Manahan) -->
             <!-- ========================================= -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -289,7 +286,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="⭐ 4.3"
+                                android:text="⭐ 4.5"
                                 android:textColor="#FFB300"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -299,7 +296,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
-                            android:text="StayIn Kelapa Gading"
+                            android:text="StayIn Manahan"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -308,7 +305,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="📍 Jl. Boulevard Raya, Kelapa Gading, Jakarta Utara"
+                            android:text="📍 Jl. Adi Sucipto, Manahan, Kota Surakarta"
                             android:textColor="#757575"
                             android:textSize="13sp" />
 
@@ -340,7 +337,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Rp 350.000"
+                                    android:text="Rp 300.000"
                                     android:textColor="#1877F2"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
