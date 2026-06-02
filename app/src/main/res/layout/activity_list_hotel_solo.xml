@@ -105,7 +105,9 @@
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp">
 
+                <!-- ID btnHotelSlamet DITAMBAHKAN DI SINI -->
                 <LinearLayout
+                    android:id="@+id/btnHotelSlamet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
@@ -238,7 +240,9 @@
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp">
 
+                <!-- ID btnHotelManahan DITAMBAHKAN DI SINI -->
                 <LinearLayout
+                    android:id="@+id/btnHotelManahan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
