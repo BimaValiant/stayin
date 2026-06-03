@@ -41,6 +41,8 @@
 
         <activity android:name=".PembayaranActivity" android:exported="false" />
 
+        <activity android:name=".ReviewActivity" android:exported="false" />
+
     </application>
 
 </manifest>
