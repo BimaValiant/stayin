@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="#F5F7FA">
 
-    <!-- 1. HEADER GAMBAR KOTA -->
     <ImageView
         android:id="@+id/ivHeaderCity"
         android:layout_width="match_parent"
@@ -14,7 +13,6 @@
         android:src="@drawable/register"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Overlay Gelap (Biar teks selalu kebaca jelas) -->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,7 +20,6 @@
         app:layout_constraintBottom_toBottomOf="@id/ivHeaderCity"
         app:layout_constraintTop_toTopOf="@id/ivHeaderCity" />
 
-    <!-- 2. TOMBOL BACK (ID UDAH DITAMBAHIN BIAR GAK ERROR) -->
     <ImageView
         android:id="@+id/BtnBack"
         android:layout_width="40dp"
@@ -36,7 +33,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#FFFFFF" />
 
-    <!-- 3. TEKS JUDUL KOTA -->
     <TextView
         android:id="@+id/tvCityName"
         android:layout_width="wrap_content"
@@ -50,7 +46,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BtnBack" />
 
-    <!-- 4. TEKS SUBTITLE -->
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
@@ -63,7 +58,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCityName" />
 
-    <!-- 5. INFO JUMLAH HOTEL (Dipindah ke atas biar elegan) -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +70,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
 
-    <!-- 6. AREA LIST HOTEL -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -94,9 +87,6 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-            <!-- ========================================= -->
-            <!-- CARD HOTEL 1 (StayIn Senayan) -->
-            <!-- ========================================= -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,6 +96,7 @@
                 app:cardElevation="4dp">
 
                 <LinearLayout
+                    android:id="@+id/BtnHotelJakarta1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
@@ -113,7 +104,6 @@
                     android:focusable="true"
                     android:orientation="vertical">
 
-                    <!-- Gambar Hotel -->
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
@@ -122,7 +112,6 @@
                         android:src="@drawable/hoteljakarta1"
                         />
 
-                    <!-- Area Detail Info -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,7 +149,6 @@
                                 android:textStyle="bold" />
                         </LinearLayout>
 
-                        <!-- Nama & Lokasi -->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -229,9 +217,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- ========================================= -->
-            <!-- CARD HOTEL 2 (StayIn Kelapa Gading) -->
-            <!-- ========================================= -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -241,6 +226,7 @@
                 app:cardElevation="4dp">
 
                 <LinearLayout
+                    android:id="@+id/BtnHotelJakarta2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"

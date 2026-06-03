@@ -7,6 +7,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.LinearLayout // <-- TAMBAHAN IMPORT
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -31,6 +32,24 @@ class ListHotelPurwokerto : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
+
+        // ==========================================
+        // FITUR BARU: KLIK CARD HOTEL KE PEMBAYARAN
+        // ==========================================
+        val btnHotelGor = findViewById<LinearLayout>(R.id.BtnHotelGor)
+        btnHotelGor.setOnClickListener {
+            // Langsung lempar ke halaman pembayaran
+            val intent = Intent(this, PembayaranActivity::class.java)
+            startActivity(intent)
+        }
+
+        val btnHotelAlunAlun = findViewById<LinearLayout>(R.id.BtnHotelAlunAlun)
+        btnHotelAlunAlun.setOnClickListener {
+            // Langsung lempar ke halaman pembayaran
+            val intent = Intent(this, PembayaranActivity::class.java)
+            startActivity(intent)
+        }
+        // ==========================================
 
         // 2. Inisialisasi Google Play Services Location Client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
