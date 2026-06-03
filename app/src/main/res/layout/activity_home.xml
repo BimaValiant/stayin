@@ -125,14 +125,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardBackgroundColor="#EAF3FF"
                         app:cardElevation="0dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🌟 Populer"
-                            android:textColor="#1877F2"
-                            android:textStyle="bold"
-                            android:paddingHorizontal="20dp"
-                            android:paddingVertical="10dp"/>
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -143,14 +136,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardBackgroundColor="#FFFFFF"
                         app:cardElevation="2dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🔥 Promo"
-                            android:textColor="#616161"
-                            android:textStyle="bold"
-                            android:paddingHorizontal="20dp"
-                            android:paddingVertical="10dp"/>
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -160,14 +146,7 @@
                         app:cardCornerRadius="20dp"
                         app:cardBackgroundColor="#FFFFFF"
                         app:cardElevation="2dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="💰 Hemat"
-                            android:textColor="#616161"
-                            android:textStyle="bold"
-                            android:paddingHorizontal="20dp"
-                            android:paddingVertical="10dp"/>
+
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </HorizontalScrollView>
