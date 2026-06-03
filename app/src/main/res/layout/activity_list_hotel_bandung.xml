@@ -150,7 +150,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
-                            android:text="The Trans Luxury Hotel"
+                            android:text="The Trans Luxury StayIn Hotel"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -286,7 +286,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
-                            android:text="Padma Hotel Bandung"
+                            android:text="StayIn Padma"
                             android:textColor="#1A1A1A"
                             android:textSize="20sp"
                             android:textStyle="bold" />
