@@ -87,13 +87,14 @@
                         android:orientation="horizontal"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rp 300.000"
+                            android:text="Rp 580.000"
                             android:textColor="#1877F2"
-                            android:textStyle="bold"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -184,13 +185,14 @@
                         android:orientation="horizontal"
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rp 385.000"
+                            android:text="Rp 749.000"
                             android:textColor="#1877F2"
-                            android:textStyle="bold"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
