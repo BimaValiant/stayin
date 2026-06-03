@@ -36,17 +36,21 @@ class ListHotelPurwokerto : AppCompatActivity() {
         // ==========================================
         // FITUR BARU: KLIK CARD HOTEL KE PEMBAYARAN
         // ==========================================
-        val btnHotelGor = findViewById<LinearLayout>(R.id.BtnHotelGor)
+        val btnHotelGor = findViewById<LinearLayout>(R.id.BtnHotelAlunAlun)
         btnHotelGor.setOnClickListener {
-            // Langsung lempar ke halaman pembayaran
-            val intent = Intent(this, PembayaranActivity::class.java)
+            val intent = Intent(this, PesanHotelActivity::class.java)
+            intent.putExtra("HOTEL_ID", 2)
+            intent.putExtra("NAMA_HOTEL", "StayIn GOR Purwokerto") // <-- KIRIM NAMA
+            intent.putExtra("HARGA_HOTEL", "Rp 350.000")          // <-- KIRIM HARGA
             startActivity(intent)
         }
 
-        val btnHotelAlunAlun = findViewById<LinearLayout>(R.id.BtnHotelAlunAlun)
+        val btnHotelAlunAlun = findViewById<LinearLayout>(R.id.BtnHotelGor)
         btnHotelAlunAlun.setOnClickListener {
-            // Langsung lempar ke halaman pembayaran
-            val intent = Intent(this, PembayaranActivity::class.java)
+            val intent = Intent(this, PesanHotelActivity::class.java)
+            intent.putExtra("HOTEL_ID", 3)
+            intent.putExtra("NAMA_HOTEL", "StayIn Alun Alun Purwokerto") // <-- KIRIM NAMA
+            intent.putExtra("HARGA_HOTEL", "Rp 300.000")                // <-- KIRIM HARGA
             startActivity(intent)
         }
         // ==========================================

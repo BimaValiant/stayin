@@ -1,145 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F8FAFC"
     android:orientation="vertical">
 
+    <!-- HEADER / TOOLBAR AREA -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="16dp">
 
         <ImageView
             android:id="@+id/BtnBack"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginBottom="16dp"
-            android:src="@android:drawable/ic_menu_revert" />
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_media_previous"
+            android:contentDescription="Kembali" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pesan Hotel"
-            android:textColor="#000000"
-            android:textSize="24sp"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Konfirmasi Pesanan"
+            android:textColor="#1E293B"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pilih tanggal check-in dan check-out"
-            android:textColor="#808080"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"/>
+        <ImageView
+            android:id="@+id/BtnHome"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="Home" />
+
+        <ImageView
+            android:id="@+id/BtnProfile"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_menu_myplaces"
+            android:contentDescription="Profile" />
     </LinearLayout>
 
+    <!-- MAIN CONTENT FORM -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="24dp"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <LinearLayout
+            <!-- CARD DETAIL HOTEL -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@android:drawable/dialog_holo_light_frame"
-                android:padding="16dp"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="false">
 
-                <TextView
-                    android:id="@+id/tvNamaHotelPesan"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nama Hotel"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                <TextView
-                    android:id="@+id/tvHargaHotelPesan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Harga"
-                    android:textColor="#1877F2"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvNamaHotelPesan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Hotel Pilihan"
+                        android:textColor="#0F172A"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Purwokerto, Jawa Tengah"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="#E2E8F0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Harga Kamar"
+                            android:textColor="#64748B"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvHargaHotelPesan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 500.000"
+                            android:textColor="#1877F2"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- LABEL TANGGAL -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Check-In"
-                android:textColor="#000000"
+                android:text="Tanggal Check-In"
+                android:textColor="#334155"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
 
+            <!-- Tanggal Sekarang Bisa Diklik -->
             <TextView
+                android:id="@+id/tvTanggalPesan"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@android:drawable/editbox_background"
-                android:text="19 Februari 1945"
-                android:textColor="#000000"
+                android:layout_height="52dp"
+                android:background="#FFFFFF"
+                android:text="Pilih Tanggal Check-In"
+                android:textColor="#0F172A"
+                android:textSize="14sp"
                 android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:drawableStart="@android:drawable/ic_menu_today"
-                android:drawablePadding="12dp"
-                android:layout_marginBottom="12dp"/>
+                android:paddingHorizontal="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="20dp"/>
 
-            <CalendarView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/dialog_holo_light_frame"
-                android:layout_marginBottom="24dp"/>
-
+            <!-- LABEL KAMAR -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Check-Out"
-                android:textColor="#000000"
+                android:text="Pilih Jenis Kamar"
+                android:textColor="#334155"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
 
-            <TextView
+            <!-- FIX: Pake Spinner Biar Tinggal Pilih, Ga Ngetik Lagi -->
+            <Spinner
+                android:id="@+id/spJenisKamar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@android:drawable/editbox_background"
-                android:text="21 Februari 1945"
-                android:textColor="#000000"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:drawableStart="@android:drawable/ic_menu_today"
-                android:drawablePadding="12dp"
-                android:layout_marginBottom="12dp"/>
-
-            <CalendarView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/dialog_holo_light_frame"
-                android:layout_marginBottom="24dp"/>
+                android:layout_height="52dp"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="12dp" />
 
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/BtnPembayaran"
+    <!-- CONTAINER TOMBOL BAWAH -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_margin="24dp"
-        android:backgroundTint="#1877F2"
-        android:text="Lanjut ke Pembayaran"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/BtnPesanSekarang"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:backgroundTint="#1877F2"
+            android:text="Pesan Sekarang"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

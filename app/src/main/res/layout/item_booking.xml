@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_dialog_map"
+                android:background="#E0E0E0"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/tvNamaHotelItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Hotel Pelanggan"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tvJenisKamarItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deluxe Room"
+                    android:textSize="13sp"
+                    android:textColor="#1877F2"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Tanggal Check-In" android:textColor="#808080" android:textSize="12sp"/>
+            <TextView android:id="@+id/tvTanggalItem" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2026-06-10" android:textColor="#333333" android:textSize="12sp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp" android:gravity="center_vertical">
+            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Status Pembayaran" android:textColor="#808080" android:textSize="12sp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#4EFF9A">
+
+                <TextView
+                    android:id="@+id/tvStatusItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PAID"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"/>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBatalkanItem"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:backgroundTint="#FF3B30"
+            android:text="Batalkan Booking"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
