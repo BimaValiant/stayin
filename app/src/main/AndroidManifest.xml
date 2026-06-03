@@ -31,6 +31,8 @@
 
         <activity android:name=".ListHotelPurwokerto" android:exported="false" />
         <activity android:name=".ListHotelJakartaActivity" android:exported="false" />
+        <activity android:name=".ListHotelBandungActivity" android:exported="false" />
+        <activity android:name=".ListHotelSoloActivity" android:exported="false" />
 
         <activity android:name=".PesanHotelActivity" android:exported="false" />
         <activity android:name=".BookingActivity" android:exported="false" />

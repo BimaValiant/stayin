@@ -7,6 +7,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -54,11 +55,76 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, ListHotelJakartaActivity::class.java))
         }
 
+        // Fungsi Klik Gambar Bandung
+        val btnPilihHotelBdg = findViewById<CardView>(R.id.BtnPilihHotelBdg)
+        btnPilihHotelBdg?.setOnClickListener {
+            startActivity(Intent(this, ListHotelBandungActivity::class.java))
+        }
+
+        // === FUNGSI KLIK GAMBAR SOLO DI BAWAH (BARU) ===
+        val btnPilihHotelSolo = findViewById<CardView>(R.id.BtnPilihHotelSolo)
+        btnPilihHotelSolo?.setOnClickListener {
+            startActivity(Intent(this, ListHotelSoloActivity::class.java))
+        }
+
+        // ==========================================
+        // FITUR BARU: LOGIC SEARCH BAR (KOLOM PENCARIAN)
+        // ==========================================
+        val etSearchCity = findViewById<EditText>(R.id.etSearchCity)
+        val btnSearchIcon = findViewById<ImageView>(R.id.btnSearchIcon)
+
+        // Fungsi pas tombol "Search" / "Enter" di keyboard HP ditekan
+        etSearchCity.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                lakukanPencarian(etSearchCity.text.toString())
+                true
+            } else {
+                false
+            }
+        }
+
+        // Fungsi kalau user ngeklik ikon kaca pembesar
+        btnSearchIcon.setOnClickListener {
+            lakukanPencarian(etSearchCity.text.toString())
+        }
+
         // ==========================================
         // 2. JALANKAN GPS UNTUK REKOMENDASI HORIZONTAL
         // ==========================================
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         checkLocationPermission()
+    }
+
+    // ==========================================
+    // FUNGSI BARU UNTUK MENANGANI PENCARIAN
+    // ==========================================
+    private fun lakukanPencarian(keyword: String) {
+        val kota = keyword.trim().lowercase()
+
+        if (kota.isEmpty()) {
+            Toast.makeText(this, "Ketik nama kota dulu, ya!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Arahkan ke halaman sesuai kota yang diketik
+        when {
+            kota.contains("jakarta") -> {
+                startActivity(Intent(this, ListHotelJakartaActivity::class.java))
+            }
+            kota.contains("purwokerto") -> {
+                startActivity(Intent(this, ListHotelPurwokerto::class.java))
+            }
+            kota.contains("bandung") -> {
+                startActivity(Intent(this, ListHotelBandungActivity::class.java))
+            }
+            kota.contains("solo") -> {
+                // GEMBOK SOLO DIBUKA: Langsung ke halaman Solo
+                startActivity(Intent(this, ListHotelSoloActivity::class.java))
+            }
+            else -> {
+                Toast.makeText(this, "Waduh, belum ada hotel di kota $keyword nih.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun checkLocationPermission() {
@@ -80,7 +146,6 @@ class HomeActivity : AppCompatActivity() {
         if (requestCode == 101 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getDeviceLocation()
         } else {
-            // Default pusat Purwokerto kalau user nolak GPS
             ambilDataHotelBerdasarkanLokasi(-7.4243, 109.2302)
         }
     }
@@ -118,52 +183,41 @@ class HomeActivity : AppCompatActivity() {
                             val jsonObject = JSONObject(jsonStr)
                             val dataObj = jsonObject.getJSONObject("data")
 
-                            // Ambil nama kota terdekat dari deteksi backend Laravel
                             val kotaTerdekat = dataObj.optString("kota_terdekat", "Purwokerto")
 
-                            // SIKAT ID REKOMENDASI UTAMA & PAKSA VISIBLE
-                            findViewById<TextView>(R.id.tvTitleRekomendasi).text = "Rekomendasi Terdekat di $kotaTerdekat 📍"
+                            findViewById<TextView>(R.id.tvTitleRekomendasi).text = "Rekomendasi Terdekat di $kotaTerdekat \uD83D\uDCCD"
                             findViewById<android.widget.HorizontalScrollView>(R.id.scrollRekomendasiHorizontal).visibility = View.VISIBLE
 
-                            // SET ISI TIAP-TIAP CARD REKOMENDASI YANG MIRING KE SAMPING BERDASARKAN KOTA
                             if (kotaTerdekat.equals("Purwokerto", ignoreCase = true)) {
-
-                                // Card 1 (Purwokerto Alun-Alun)
                                 findViewById<TextView>(R.id.tvNamaReko1).text = "StayIn Alun Alun Purwokerto"
                                 findViewById<TextView>(R.id.tvRatingReko1).text = "★ 4.6"
                                 findViewById<TextView>(R.id.tvAlamatReko1).text = "Jl. Jend. Sudirman, Purwokerto"
                                 findViewById<TextView>(R.id.tvHargaReko1).text = "Rp 300.000"
                                 findViewById<ImageView>(R.id.ivHotelImg1).setImageResource(R.drawable.purwokertohome)
 
-                                // Card 2 (Purwokerto GOR)
                                 findViewById<TextView>(R.id.tvNamaReko2).text = "StayIn GOR Purwokerto"
                                 findViewById<TextView>(R.id.tvRatingReko2).text = "★ 4.3"
                                 findViewById<TextView>(R.id.tvAlamatReko2).text = "Jl. Prof. Dr. Suharso, Purwokerto"
                                 findViewById<TextView>(R.id.tvHargaReko2).text = "Rp 350.000"
                                 findViewById<ImageView>(R.id.ivHotelImg2).setImageResource(R.drawable.purwokertohome)
 
-                                // Klik Card miringnya langsung oper ke Halaman List Purwokerto
                                 val intentPwt = Intent(this@HomeActivity, ListHotelPurwokerto::class.java)
                                 findViewById<CardView>(R.id.cardReko1).setOnClickListener { startActivity(intentPwt) }
                                 findViewById<CardView>(R.id.cardReko2).setOnClickListener { startActivity(intentPwt) }
 
                             } else if (kotaTerdekat.equals("Jakarta", ignoreCase = true)) {
-
-                                // Card 1 (Jakarta Senayan)
                                 findViewById<TextView>(R.id.tvNamaReko1).text = "StayIn Senayan Jakarta"
                                 findViewById<TextView>(R.id.tvRatingReko1).text = "★ 4.8"
                                 findViewById<TextView>(R.id.tvAlamatReko1).text = "Gelora, Tanah Abang, Jakarta Pusat"
                                 findViewById<TextView>(R.id.tvHargaReko1).text = "Rp 550.000"
                                 findViewById<ImageView>(R.id.ivHotelImg1).setImageResource(R.drawable.jakartahome)
 
-                                // Card 2 (Jakarta Gading)
                                 findViewById<TextView>(R.id.tvNamaReko2).text = "StayIn Kelapa Gading"
                                 findViewById<TextView>(R.id.tvRatingReko2).text = "★ 4.5"
                                 findViewById<TextView>(R.id.tvAlamatReko2).text = "Kelapa Gading, Jakarta Utara"
                                 findViewById<TextView>(R.id.tvHargaReko2).text = "Rp 490.000"
                                 findViewById<ImageView>(R.id.ivHotelImg2).setImageResource(R.drawable.jakartahome)
 
-                                // Klik Card miringnya langsung oper ke Halaman List Jakarta
                                 val intentJkt = Intent(this@HomeActivity, ListHotelJakartaActivity::class.java)
                                 findViewById<CardView>(R.id.cardReko1).setOnClickListener { startActivity(intentJkt) }
                                 findViewById<CardView>(R.id.cardReko2).setOnClickListener { startActivity(intentJkt) }
