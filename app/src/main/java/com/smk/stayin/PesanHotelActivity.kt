@@ -94,7 +94,7 @@ class PesanHotelActivity : AppCompatActivity() {
             val kamarTerpilih = spJenisKamar.selectedItem.toString()
 
             if (tanggalTerpilih.isEmpty()) {
-                Toast.makeText(this, "Pilih tanggal check-in dulu, cuk!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Silahkan pilih tanggal check-in", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -110,7 +110,7 @@ class PesanHotelActivity : AppCompatActivity() {
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
 
         if (tokenMentah.isEmpty()) {
-            Toast.makeText(this, "Lu belum login/sesi habis, cuk!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Sesi habis, Silahkan login ulang", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -128,13 +128,18 @@ class PesanHotelActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@PesanHotelActivity, "Booking Disimpan! Silakan Bayar 💳", Toast.LENGTH_SHORT).show()
 
-                        // PINDAH KE PAYMENT ACTIVITY
+                        // AMBIL ID BOOKING BARU DARI LAYAR RESPONS LARAVEL (Jika dibutuhkan)
+                        // Untuk mempermudah, kita kirim ID Hotel yang didapat dari Intent awal sebagai referensi cadangan,
+                        // atau idealnya parse ID booking dari json response.
+
                         val intent = Intent(this@PesanHotelActivity, PembayaranActivity::class.java)
-                        // Kirim data tambahan jika PaymentActivity lu butuh ID buat bayar
+                        intent.putExtra("BOOKING_ID", idHotel) // Kirim ID referensi transaksi
+                        intent.putExtra("JENIS_KAMAR", tipeKamar)
+                        intent.putExtra("HARGA_MENTAH", hargaTotalFinal.toInt())
                         startActivity(intent)
                         finish()
                     } else {
-                        Log.e("API_ERR", "Gagal insert. Code: ${response.code()}")
+                        Log.e("API_ERR", "Gagal insert data.")
                     }
                 }
 

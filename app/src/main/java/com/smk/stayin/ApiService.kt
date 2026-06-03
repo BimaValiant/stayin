@@ -60,4 +60,23 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body request: HashMap<String, Any>
     ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("payment")
+    fun bayarBooking(
+        @Header("Authorization") token: String,
+        @Field("booking_id") bookingId: Int,
+        @Field("amount") amount: Int,
+        @Field("payment_method") paymentMethod: String
+    ): Call<ResponseBody>
+
+
+    @FormUrlEncoded
+    @POST("review")
+    fun kirimReview(
+        @Field("user_name") userName: String,
+        @Field("nama_hotel") namaHotel: String,
+        @Field("rating") rating: Float,
+        @Field("komentar") komentar: String
+    ): Call<ResponseBody>
 }

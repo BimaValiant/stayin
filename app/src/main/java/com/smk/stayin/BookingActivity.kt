@@ -42,7 +42,7 @@ class BookingActivity : AppCompatActivity() {
         if (tokenMentah.isNotEmpty()) {
             muatDataBookingDariDatabase()
         } else {
-            Toast.makeText(this, "Sesi login habis, silakan login ulang!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Sesi habis, Silahkan login ulang!", Toast.LENGTH_SHORT).show()
         }
 
         // 4. Logika Pindah Tab Bar Navigasi Bawah
@@ -70,7 +70,7 @@ class BookingActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<List<BookingResponse>>, t: Throwable) {
-                    Toast.makeText(this@BookingActivity, "Koneksi internet ampas!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@BookingActivity, "Koneksi internet jelek!", Toast.LENGTH_SHORT).show()
                 }
             })
     }

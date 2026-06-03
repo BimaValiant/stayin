@@ -102,7 +102,7 @@ class HomeActivity : AppCompatActivity() {
         val kota = keyword.trim().lowercase()
 
         if (kota.isEmpty()) {
-            Toast.makeText(this, "Ketik nama kota dulu, ya!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Silahkan ketik nama kota anda", Toast.LENGTH_SHORT).show()
             return
         }
 
