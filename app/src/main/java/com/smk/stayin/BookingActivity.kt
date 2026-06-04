@@ -80,7 +80,7 @@ class BookingActivity : AppCompatActivity() {
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(this@BookingActivity, "Booking dibatalkan! 🗑️", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@BookingActivity, "Booking dibatalkan!", Toast.LENGTH_SHORT).show()
 
                         // PINDAH KE HALAMAN CANCELLED Sesuai Request Lu!
                         val intent = Intent(this@BookingActivity, BookingCancelledActivity::class.java)
