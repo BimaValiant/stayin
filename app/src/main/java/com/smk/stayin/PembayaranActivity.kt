@@ -24,17 +24,17 @@ class PembayaranActivity : AppCompatActivity() {
         val btnBack = findViewById<ImageView>(R.id.BtnBack)
         val btnBayar = findViewById<Button>(R.id.BtnHasilPembayaran)
 
+        // Inisialisasi UI komponen
+        val tvNamaHotel = findViewById<TextView>(R.id.tvNamaHotel)
         val tvNamaKamar = findViewById<TextView>(R.id.tvNamaKamar)
         val tvHargaRincian = findViewById<TextView>(R.id.tvHargaRincian)
         val tvTotalAtas = findViewById<TextView>(R.id.tvTotalPembayaranAtas)
         val tvTotalBawah = findViewById<TextView>(R.id.tvTotalPembayaranBawah)
 
-        // 1. Tangkap semua data kiriman dari activity sebelumnya
+        // 1. Tangkap semua data kiriman dari intent sebelum ini
         val bookingId = intent.getIntExtra("BOOKING_ID", 0)
         val jenisKamar = intent.getStringExtra("JENIS_KAMAR") ?: "Kamar Hotel"
         val hargaMentah = intent.getIntExtra("HARGA_MENTAH", 0)
-
-        // 🔥 INI DIA! Biar gak merah, variabel ini wajib dideklarasikan di sini!
         val namaHotel = intent.getStringExtra("NAMA_HOTEL") ?: "StayIn Hotel"
 
         // Hitung rincian matematika pajak & layanan
@@ -45,6 +45,8 @@ class PembayaranActivity : AppCompatActivity() {
         val localeID = Locale("in", "ID")
         val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
 
+        // 🔥 Mengisi teks secara dinamis mengikuti pesanan asli
+        tvNamaHotel.text = namaHotel
         tvNamaKamar.text = "Kategori: $jenisKamar"
         tvHargaRincian.text = ": ${formatRupiah.format(hargaMentah).replace("Rp", "Rp ")}"
         tvTotalAtas.text = formatRupiah.format(totalPembayaran).replace("Rp", "Rp ")
@@ -52,13 +54,12 @@ class PembayaranActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener { finish() }
 
-        // 2. Tombol bayar diklik, oper variabel namaHotel ke fungsi bawah
+        // 2. Klik Bayar
         btnBayar.setOnClickListener {
             prosesPembayaranKeLaravel(bookingId, totalPembayaran, namaHotel)
         }
     }
 
-    // 3. Fungsi dengan parameter namaHotel tambahan biar dinamis
     private fun prosesPembayaranKeLaravel(bookingId: Int, totalAmount: Int, namaHotel: String) {
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
@@ -70,14 +71,14 @@ class PembayaranActivity : AppCompatActivity() {
 
         val tokenLengkap = "Bearer $tokenMentah"
 
-        // Tembak API Laravel
+        // Kirim data ke REST API Laravel
         ApiClient.instance.bayarBooking(tokenLengkap, bookingId, totalAmount, "Transfer Bank")
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil!", Toast.LENGTH_SHORT).show()
 
-                        // Kirim data nama hotel asli ke halaman ReviewActivity
+                        // Alihkan ke halaman ReviewActivity secara dinamis bawa data nama hotel
                         val intent = Intent(this@PembayaranActivity, ReviewActivity::class.java)
                         intent.putExtra("NAMA_HOTEL", namaHotel)
                         intent.putExtra("USER_NAME", "Pelanggan StayIn")
