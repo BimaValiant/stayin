@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.ResponseBody
+import org.json.JSONObject // <-- PASTIKAN INI TER-IMPORT
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,7 +57,6 @@ class PesanHotelActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val kamarTerpilih = listKamar[position]
 
-                // FIX: Menggunakan variabel kamarTerpilih yang benar
                 hargaTotalFinal = when (kamarTerpilih) {
                     "Standard Room" -> hargaDasarHotel
                     "Deluxe Room"   -> hargaDasarHotel + 150000
@@ -64,7 +64,7 @@ class PesanHotelActivity : AppCompatActivity() {
                     else            -> hargaDasarHotel
                 }
 
-                // Format angka murni ke rupiah string lagi biar cantik di UI
+                // Format angka murni ke rupiah string
                 val formatRupiah = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
                 tvHargaHotelPesan.text = formatRupiah.format(hargaTotalFinal).replace("Rp", "Rp ")
             }
@@ -97,14 +97,12 @@ class PesanHotelActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // MENGIRIM namaHotel JUGA SEBAGAI PARAMETER!
             kirimDataBookingKeDatabase(idHotel, kamarTerpilih, tanggalTerpilih, namaHotel)
         }
 
         btnBack.setOnClickListener { finish() }
     }
 
-    // Menambahkan namaHotel: String di dalam parameter fungsi
     private fun kirimDataBookingKeDatabase(idHotel: Int, tipeKamar: String, tanggalCheckin: String, namaHotel: String) {
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
@@ -120,27 +118,44 @@ class PesanHotelActivity : AppCompatActivity() {
         dataBooking["hotel_id"] = idHotel
         dataBooking["jenis_kamar"] = tipeKamar
         dataBooking["waktu_pemesanan"] = tanggalCheckin
-        // dataBooking["total_harga"] = hargaTotalFinal
 
         ApiClient.instance.buatBooking(tokenLengkap, dataBooking)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
+
+                        // KODE BARU: Mengambil Booking ID asli dari Laravel
+                        val jsonStr = response.body()?.string()
+                        var realBookingId = idHotel // Nilai cadangan
+
+                        try {
+                            if (!jsonStr.isNullOrEmpty()) {
+                                val jsonObject = JSONObject(jsonStr)
+                                // Mengambil ID dari dalam objek "data"
+                                val dataObj = jsonObject.getJSONObject("data")
+                                realBookingId = dataObj.getInt("id")
+                                Log.d("DEBUG_STAYIN", "Booking ID Asli dari Server: $realBookingId")
+                            }
+                        } catch (e: Exception) {
+                            Log.e("PARSE_ERR", "Gagal parse ID Booking: ${e.message}")
+                        }
+
                         Toast.makeText(this@PesanHotelActivity, "Booking Disimpan! Silakan Bayar 💳", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(this@PesanHotelActivity, PembayaranActivity::class.java)
-
-                        // INI BAGIAN YANG DITAMBAHKAN: Mengirim nama hotel ke halaman pembayaran
                         intent.putExtra("NAMA_HOTEL", namaHotel)
 
-                        intent.putExtra("BOOKING_ID", idHotel)
+                        // MENGIRIM BOOKING ID YANG BENAR
+                        intent.putExtra("BOOKING_ID", realBookingId)
                         intent.putExtra("JENIS_KAMAR", tipeKamar)
                         intent.putExtra("HARGA_MENTAH", hargaTotalFinal.toInt())
 
                         startActivity(intent)
                         finish()
                     } else {
-                        Log.e("API_ERR", "Gagal insert data.")
+                        val err = response.errorBody()?.string()
+                        Log.e("API_ERR", "Gagal insert data. Response: $err")
+                        Toast.makeText(this@PesanHotelActivity, "Gagal membuat booking!", Toast.LENGTH_SHORT).show()
                     }
                 }
 
