@@ -29,10 +29,13 @@ class PembayaranActivity : AppCompatActivity() {
         val tvTotalAtas = findViewById<TextView>(R.id.tvTotalPembayaranAtas)
         val tvTotalBawah = findViewById<TextView>(R.id.tvTotalPembayaranBawah)
 
-        // Tangkap data kiriman
+        // 1. Tangkap semua data kiriman dari activity sebelumnya
         val bookingId = intent.getIntExtra("BOOKING_ID", 0)
         val jenisKamar = intent.getStringExtra("JENIS_KAMAR") ?: "Kamar Hotel"
         val hargaMentah = intent.getIntExtra("HARGA_MENTAH", 0)
+
+        // 🔥 INI DIA! Biar gak merah, variabel ini wajib dideklarasikan di sini!
+        val namaHotel = intent.getStringExtra("NAMA_HOTEL") ?: "StayIn Hotel"
 
         // Hitung rincian matematika pajak & layanan
         val pajak = (hargaMentah * 0.1).toInt()
@@ -49,12 +52,14 @@ class PembayaranActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener { finish() }
 
+        // 2. Tombol bayar diklik, oper variabel namaHotel ke fungsi bawah
         btnBayar.setOnClickListener {
-            prosesPembayaranKeLaravel(bookingId, totalPembayaran)
+            prosesPembayaranKeLaravel(bookingId, totalPembayaran, namaHotel)
         }
     }
 
-    private fun prosesPembayaranKeLaravel(bookingId: Int, totalAmount: Int) {
+    // 3. Fungsi dengan parameter namaHotel tambahan biar dinamis
+    private fun prosesPembayaranKeLaravel(bookingId: Int, totalAmount: Int, namaHotel: String) {
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
 
@@ -72,9 +77,9 @@ class PembayaranActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil!", Toast.LENGTH_SHORT).show()
 
-                        // ALIHIN KE HALAMAN REVIEW SEBELUM KELUAR, CUK!
+                        // Kirim data nama hotel asli ke halaman ReviewActivity
                         val intent = Intent(this@PembayaranActivity, ReviewActivity::class.java)
-                        intent.putExtra("NAMA_HOTEL", "StayIn Alun Alun Purwokerto") // Sesuai text di xml lu
+                        intent.putExtra("NAMA_HOTEL", namaHotel)
                         intent.putExtra("USER_NAME", "Pelanggan StayIn")
                         startActivity(intent)
                         finish()
