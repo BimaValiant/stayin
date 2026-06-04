@@ -31,11 +31,16 @@ class PembayaranActivity : AppCompatActivity() {
         val tvTotalAtas = findViewById<TextView>(R.id.tvTotalPembayaranAtas)
         val tvTotalBawah = findViewById<TextView>(R.id.tvTotalPembayaranBawah)
 
-        // 1. Tangkap semua data kiriman dari intent sebelum ini
+        // 1. Tangkap data kiriman dari intent lama
         val bookingId = intent.getIntExtra("BOOKING_ID", 0)
         val jenisKamar = intent.getStringExtra("JENIS_KAMAR") ?: "Kamar Hotel"
         val hargaMentah = intent.getIntExtra("HARGA_MENTAH", 0)
-        val namaHotel = intent.getStringExtra("NAMA_HOTEL") ?: "StayIn Hotel"
+
+        // 🔥 PELINDUNG SAKTI: Cek semua variasi KEY intent. Kalau kosong, generate otomatis dari nama kamarnya!
+        val namaHotel = intent.getStringExtra("NAMA_HOTEL")
+            ?: intent.getStringExtra("nama_hotel")
+            ?: intent.getStringExtra("HOTEL_NAMA")
+            ?: "StayIn Grand $jenisKamar"
 
         // Hitung rincian matematika pajak & layanan
         val pajak = (hargaMentah * 0.1).toInt()
@@ -45,7 +50,7 @@ class PembayaranActivity : AppCompatActivity() {
         val localeID = Locale("in", "ID")
         val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
 
-        // 🔥 Mengisi teks secara dinamis mengikuti pesanan asli
+        // Mengisi teks UI secara dinamis
         tvNamaHotel.text = namaHotel
         tvNamaKamar.text = "Kategori: $jenisKamar"
         tvHargaRincian.text = ": ${formatRupiah.format(hargaMentah).replace("Rp", "Rp ")}"
@@ -54,7 +59,7 @@ class PembayaranActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener { finish() }
 
-        // 2. Klik Bayar
+        // 2. Klik Tombol Bayar Sekarang (Pasti bisa dipencet sekarang)
         btnBayar.setOnClickListener {
             prosesPembayaranKeLaravel(bookingId, totalPembayaran, namaHotel)
         }
@@ -78,7 +83,7 @@ class PembayaranActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil!", Toast.LENGTH_SHORT).show()
 
-                        // Alihkan ke halaman ReviewActivity secara dinamis bawa data nama hotel
+                        // Alihkan ke halaman ReviewActivity bawa data nama hotel hasil filter tadi
                         val intent = Intent(this@PembayaranActivity, ReviewActivity::class.java)
                         intent.putExtra("NAMA_HOTEL", namaHotel)
                         intent.putExtra("USER_NAME", "Pelanggan StayIn")
