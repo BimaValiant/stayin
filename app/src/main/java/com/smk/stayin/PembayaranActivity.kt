@@ -133,7 +133,6 @@ class PembayaranActivity : AppCompatActivity() {
         }
     }
 
-    // Menambahkan parameter paymentMethod
     private fun prosesPembayaranKeLaravel(bookingId: Int, totalAmount: Int, namaHotel: String, paymentMethod: String) {
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
@@ -159,8 +158,11 @@ class PembayaranActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        Log.e("PAY_ERR", "Gagal bayar. Code: ${response.code()}")
-                        Toast.makeText(this@PembayaranActivity, "Gagal memproses pembayaran!", Toast.LENGTH_SHORT).show()
+                        // KODE BARU: MENANGKAP PESAN ERROR DARI LARAVEL
+                        val errorDetail = response.errorBody()?.string()
+                        Log.e("PAY_ERR", "Gagal bayar. Code: ${response.code()} | Detail: $errorDetail")
+
+                        Toast.makeText(this@PembayaranActivity, "Gagal memproses! Cek Logcat", Toast.LENGTH_LONG).show()
                     }
                 }
 

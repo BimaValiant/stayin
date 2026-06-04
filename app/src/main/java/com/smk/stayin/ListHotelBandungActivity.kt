@@ -7,7 +7,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.LinearLayout // <-- TAMBAHAN IMPORT
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -27,7 +27,7 @@ class ListHotelBandungActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_hotel_bandung)
 
-        // 1. Tombol Back Kembali ke Home
+        // 1. Tombol Back Kembali ke Home (Sesuai ID di XML: btnBack)
         val btnBack = findViewById<ImageView>(R.id.btnBack)
         btnBack.setOnClickListener {
             finish()
@@ -36,21 +36,24 @@ class ListHotelBandungActivity : AppCompatActivity() {
         // ==========================================
         // FITUR BARU: KLIK CARD HOTEL KE PEMBAYARAN
         // ==========================================
-        val btnHotelGor = findViewById<LinearLayout>(R.id.btnHotelTrans)
-        btnHotelGor.setOnClickListener {
+
+        // Hotel 1: The Trans Luxury Hotel (Sesuai XML)
+        val btnHotelTrans = findViewById<LinearLayout>(R.id.btnHotelTrans)
+        btnHotelTrans.setOnClickListener {
             val intent = Intent(this, PesanHotelActivity::class.java)
-            intent.putExtra("HOTEL_ID", 2)
-            intent.putExtra("NAMA_HOTEL", "The Trans Luxury StayIn Hotel") // <-- KIRIM NAMA
-            intent.putExtra("HARGA_HOTEL", "Rp 1.250.000")          // <-- KIRIM HARGA
+            intent.putExtra("HOTEL_ID", 4)
+            intent.putExtra("NAMA_HOTEL", "The Trans Luxury StayIn Hotel") // Nama dari XML
+            intent.putExtra("HARGA_HOTEL", "Rp 1.250.000")                 // Harga dari XML
             startActivity(intent)
         }
 
-        val btnHotelAlunAlun = findViewById<LinearLayout>(R.id.btnHotelPadma)
-        btnHotelAlunAlun.setOnClickListener {
+        // Hotel 2: Padma Hotel (Sesuai XML)
+        val btnHotelPadma = findViewById<LinearLayout>(R.id.btnHotelPadma)
+        btnHotelPadma.setOnClickListener {
             val intent = Intent(this, PesanHotelActivity::class.java)
-            intent.putExtra("HOTEL_ID", 3)
-            intent.putExtra("NAMA_HOTEL", "StayIn Padma") // <-- KIRIM NAMA
-            intent.putExtra("HARGA_HOTEL", "Rp 950.000")                // <-- KIRIM HARGA
+            intent.putExtra("HOTEL_ID", 5)
+            intent.putExtra("NAMA_HOTEL", "StayIn Padma")                  // Nama dari XML
+            intent.putExtra("HARGA_HOTEL", "Rp 950.000")                   // Harga dari XML
             startActivity(intent)
         }
         // ==========================================
@@ -66,27 +69,24 @@ class ListHotelBandungActivity : AppCompatActivity() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            // MUNCULIN POP-UP IZIN LOKASI DI HP USER, CUK!
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 101
             )
         } else {
-            // Jika sudah diizinkan sebelumnya, langsung sedot koordinatnya
             getDeviceLocation()
         }
     }
 
-    // Nangkap respon user pas ngeklik dialog "Izinkan" atau "Tolak"
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 101 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getDeviceLocation()
         } else {
             Toast.makeText(this, "Membutuhkan izin lokasi!", Toast.LENGTH_LONG).show()
-            // Default pakai koordinat pusat Purwokerto kalau user nolak GPS
-            kirimKoordinatKeLaravel(-7.4243, 109.2302)
+            // Default koordinat Alun-Alun Bandung
+            kirimKoordinatKeLaravel(-6.9214, 107.6071)
         }
     }
 
@@ -97,12 +97,9 @@ class ListHotelBandungActivity : AppCompatActivity() {
                     val lat = location.latitude
                     val lng = location.longitude
                     Log.d("STAYIN_GPS", "Koordinat HP Lu: $lat, $lng")
-
-                    // Kirim ke database Laravel via Ngrok
                     kirimKoordinatKeLaravel(lat, lng)
                 } else {
-                    // Jikalau GPS HP mati atau null, set default Alun-Alun Purwokerto
-                    kirimKoordinatKeLaravel(-7.4243, 109.2302)
+                    kirimKoordinatKeLaravel(-6.9214, 107.6071)
                 }
             }
         } catch (e: SecurityException) {
@@ -111,31 +108,22 @@ class ListHotelBandungActivity : AppCompatActivity() {
     }
 
     private fun kirimKoordinatKeLaravel(latitude: Double, longitude: Double) {
-        // 1. Ambil token dari SharedPreferences (samakan KEY-nya dengan pas login sukses)
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
 
         if (tokenMentah.isEmpty()) {
-            Toast.makeText(this, "Sesi login habis, silakan login ulang, bro!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Sesi login habis, silakan login ulang!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // 2. FORMAT WAJIB SANCTUM: Tambahkan prefiks "Bearer " di depan token mentah
         val tokenLengkap = "Bearer $tokenMentah"
 
-        // 3. Tembak API (Sekarang dijamin gak akan merah lagi!)
         ApiClient.instance.kirimLokasiUser(tokenLengkap, latitude, longitude)
             .enqueue(object : Callback<ResponseBody> {
-
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
                         val jsonStr = response.body()?.string()
                         Log.d("SINKRON_LOKASI_OK", jsonStr.toString())
-
-                        val jsonObject = JSONObject(jsonStr)
-                        val dataObj = jsonObject.getJSONObject("data")
-                        val jsonArrayHotels = dataObj.getJSONArray("hotels")
-
                         Toast.makeText(this@ListHotelBandungActivity, "Rekomendasi hotel terdekat siap!", Toast.LENGTH_SHORT).show()
                     } else {
                         Log.e("API_ERROR", "Respon gagal: ${response.code()}")

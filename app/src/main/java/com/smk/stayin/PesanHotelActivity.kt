@@ -56,11 +56,11 @@ class PesanHotelActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val kamarTerpilih = listKamar[position]
 
-                // FIX: Menggunakan variabel kamarTerpilih yang benar (bukan kamarTerpisted)
+                // FIX: Menggunakan variabel kamarTerpilih yang benar
                 hargaTotalFinal = when (kamarTerpilih) {
-                    "Standard Room" -> hargaDasarHotel          // Harga normal kartunya
-                    "Deluxe Room"   -> hargaDasarHotel + 150000 // Naik 150 ribu
-                    "Luxury Room"   -> hargaDasarHotel + 350000 // Naik 350 ribu
+                    "Standard Room" -> hargaDasarHotel
+                    "Deluxe Room"   -> hargaDasarHotel + 150000
+                    "Luxury Room"   -> hargaDasarHotel + 350000
                     else            -> hargaDasarHotel
                 }
 
@@ -69,7 +69,6 @@ class PesanHotelActivity : AppCompatActivity() {
                 tvHargaHotelPesan.text = formatRupiah.format(hargaTotalFinal).replace("Rp", "Rp ")
             }
 
-            // FIX:override fun tidak dobel lagi
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
@@ -98,14 +97,15 @@ class PesanHotelActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Kirim data ter-update ke fungsi database
-            kirimDataBookingKeDatabase(idHotel, kamarTerpilih, tanggalTerpilih)
+            // MENGIRIM namaHotel JUGA SEBAGAI PARAMETER!
+            kirimDataBookingKeDatabase(idHotel, kamarTerpilih, tanggalTerpilih, namaHotel)
         }
 
         btnBack.setOnClickListener { finish() }
     }
 
-    private fun kirimDataBookingKeDatabase(idHotel: Int, tipeKamar: String, tanggalCheckin: String) {
+    // Menambahkan namaHotel: String di dalam parameter fungsi
+    private fun kirimDataBookingKeDatabase(idHotel: Int, tipeKamar: String, tanggalCheckin: String, namaHotel: String) {
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
 
@@ -120,7 +120,7 @@ class PesanHotelActivity : AppCompatActivity() {
         dataBooking["hotel_id"] = idHotel
         dataBooking["jenis_kamar"] = tipeKamar
         dataBooking["waktu_pemesanan"] = tanggalCheckin
-        // dataBooking["total_harga"] = hargaTotalFinal // <-- Aktifin ini kalau di DB Laravel lu nanti mau ditambahin kolom harga total!
+        // dataBooking["total_harga"] = hargaTotalFinal
 
         ApiClient.instance.buatBooking(tokenLengkap, dataBooking)
             .enqueue(object : Callback<ResponseBody> {
@@ -128,14 +128,15 @@ class PesanHotelActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@PesanHotelActivity, "Booking Disimpan! Silakan Bayar 💳", Toast.LENGTH_SHORT).show()
 
-                        // AMBIL ID BOOKING BARU DARI LAYAR RESPONS LARAVEL (Jika dibutuhkan)
-                        // Untuk mempermudah, kita kirim ID Hotel yang didapat dari Intent awal sebagai referensi cadangan,
-                        // atau idealnya parse ID booking dari json response.
-
                         val intent = Intent(this@PesanHotelActivity, PembayaranActivity::class.java)
-                        intent.putExtra("BOOKING_ID", idHotel) // Kirim ID referensi transaksi
+
+                        // INI BAGIAN YANG DITAMBAHKAN: Mengirim nama hotel ke halaman pembayaran
+                        intent.putExtra("NAMA_HOTEL", namaHotel)
+
+                        intent.putExtra("BOOKING_ID", idHotel)
                         intent.putExtra("JENIS_KAMAR", tipeKamar)
                         intent.putExtra("HARGA_MENTAH", hargaTotalFinal.toInt())
+
                         startActivity(intent)
                         finish()
                     } else {

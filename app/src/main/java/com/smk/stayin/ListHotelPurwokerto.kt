@@ -7,7 +7,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.LinearLayout // <-- TAMBAHAN IMPORT
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -34,23 +34,26 @@ class ListHotelPurwokerto : AppCompatActivity() {
         }
 
         // ==========================================
-        // FITUR BARU: KLIK CARD HOTEL KE PEMBAYARAN
+        // FITUR: KLIK CARD HOTEL KE PEMBAYARAN
         // ==========================================
-        val btnHotelGor = findViewById<LinearLayout>(R.id.BtnHotelAlunAlun)
+
+        // Hotel 1: GOR Purwokerto (Pastikan R.id.BtnHotelGor sesuai dengan XML kamu)
+        val btnHotelGor = findViewById<LinearLayout>(R.id.BtnHotelGor)
         btnHotelGor.setOnClickListener {
             val intent = Intent(this, PesanHotelActivity::class.java)
             intent.putExtra("HOTEL_ID", 2)
-            intent.putExtra("NAMA_HOTEL", "StayIn GOR Purwokerto") // <-- KIRIM NAMA
-            intent.putExtra("HARGA_HOTEL", "Rp 350.000")          // <-- KIRIM HARGA
+            intent.putExtra("NAMA_HOTEL", "StayIn GOR Purwokerto")
+            intent.putExtra("HARGA_HOTEL", "Rp 350.000")
             startActivity(intent)
         }
 
-        val btnHotelAlunAlun = findViewById<LinearLayout>(R.id.BtnHotelGor)
+        // Hotel 2: Alun Alun Purwokerto (Pastikan R.id.BtnHotelAlunAlun sesuai dengan XML kamu)
+        val btnHotelAlunAlun = findViewById<LinearLayout>(R.id.BtnHotelAlunAlun)
         btnHotelAlunAlun.setOnClickListener {
             val intent = Intent(this, PesanHotelActivity::class.java)
             intent.putExtra("HOTEL_ID", 3)
-            intent.putExtra("NAMA_HOTEL", "StayIn Alun Alun Purwokerto") // <-- KIRIM NAMA
-            intent.putExtra("HARGA_HOTEL", "Rp 300.000")                // <-- KIRIM HARGA
+            intent.putExtra("NAMA_HOTEL", "StayIn Alun Alun Purwokerto")
+            intent.putExtra("HARGA_HOTEL", "Rp 300.000")
             startActivity(intent)
         }
         // ==========================================
@@ -66,26 +69,26 @@ class ListHotelPurwokerto : AppCompatActivity() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            // MUNCULIN POP-UP IZIN LOKASI DI HP USER, CUK!
+            // Munculkan pop-up izin lokasi di HP
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 101
             )
         } else {
-            // Jika sudah diizinkan sebelumnya, langsung sedot koordinatnya
+            // Jika sudah diizinkan, langsung ambil koordinatnya
             getDeviceLocation()
         }
     }
 
-    // Nangkap respon user pas ngeklik dialog "Izinkan" atau "Tolak"
+    // Menangkap respon klik dari dialog izin lokasi
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 101 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getDeviceLocation()
         } else {
             Toast.makeText(this, "Membutuhkan izin lokasi!", Toast.LENGTH_LONG).show()
-            // Default pakai koordinat pusat Purwokerto kalau user nolak GPS
+            // Default pakai koordinat pusat Purwokerto kalau user menolak akses GPS
             kirimKoordinatKeLaravel(-7.4243, 109.2302)
         }
     }
@@ -101,7 +104,7 @@ class ListHotelPurwokerto : AppCompatActivity() {
                     // Kirim ke database Laravel via Ngrok
                     kirimKoordinatKeLaravel(lat, lng)
                 } else {
-                    // Jikalau GPS HP mati atau null, set default Alun-Alun Purwokerto
+                    // Jikalau GPS HP mati atau null, set default Purwokerto
                     kirimKoordinatKeLaravel(-7.4243, 109.2302)
                 }
             }
@@ -111,19 +114,17 @@ class ListHotelPurwokerto : AppCompatActivity() {
     }
 
     private fun kirimKoordinatKeLaravel(latitude: Double, longitude: Double) {
-        // 1. Ambil token dari SharedPreferences (samakan KEY-nya dengan pas login sukses)
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
 
         if (tokenMentah.isEmpty()) {
-            Toast.makeText(this, "Sesi login habis, silakan login ulang, bro!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Sesi login habis, silakan login ulang!", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // 2. FORMAT WAJIB SANCTUM: Tambahkan prefiks "Bearer " di depan token mentah
         val tokenLengkap = "Bearer $tokenMentah"
 
-        // 3. Tembak API (Sekarang dijamin gak akan merah lagi!)
+        // Tembak API Laravel
         ApiClient.instance.kirimLokasiUser(tokenLengkap, latitude, longitude)
             .enqueue(object : Callback<ResponseBody> {
 
@@ -131,10 +132,6 @@ class ListHotelPurwokerto : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val jsonStr = response.body()?.string()
                         Log.d("SINKRON_LOKASI_OK", jsonStr.toString())
-
-                        val jsonObject = JSONObject(jsonStr)
-                        val dataObj = jsonObject.getJSONObject("data")
-                        val jsonArrayHotels = dataObj.getJSONArray("hotels")
 
                         Toast.makeText(this@ListHotelPurwokerto, "Rekomendasi hotel terdekat siap!", Toast.LENGTH_SHORT).show()
                     } else {
