@@ -90,7 +90,7 @@ class PembayaranActivity : AppCompatActivity() {
                         Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil!", Toast.LENGTH_SHORT).show()
 
                         // Pindah ke ReviewActivity dengan membawa data nama hotel asli
-                        val intent = Intent(this@PembayaranActivity, ReviewActivity::class.java)
+                        val intent = Intent(this@PembayaranActivity, PaymentSuccessActivity::class.java)
                         intent.putExtra("NAMA_HOTEL", namaHotel)
                         intent.putExtra("USER_NAME", "Pelanggan StayIn")
                         startActivity(intent)
