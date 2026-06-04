@@ -1,10 +1,13 @@
 package com.smk.stayin
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,19 +34,30 @@ class PembayaranActivity : AppCompatActivity() {
         val tvTotalAtas = findViewById<TextView>(R.id.tvTotalPembayaranAtas)
         val tvTotalBawah = findViewById<TextView>(R.id.tvTotalPembayaranBawah)
 
+        // Komponen Metode Pembayaran
+        val layoutTransferBank = findViewById<LinearLayout>(R.id.layoutTransferBank)
+        val tvTextTransferBank = findViewById<TextView>(R.id.tvTextTransferBank)
+        val tvCheckTransferBank = findViewById<TextView>(R.id.tvCheckTransferBank)
+
+        val layoutEwallet = findViewById<LinearLayout>(R.id.layoutEwallet)
+        val tvTextEwallet = findViewById<TextView>(R.id.tvTextEwallet)
+        val tvCheckEwallet = findViewById<TextView>(R.id.tvCheckEwallet)
+
+        val layoutDebit = findViewById<LinearLayout>(R.id.layoutDebit)
+        val tvTextDebit = findViewById<TextView>(R.id.tvTextDebit)
+        val tvCheckDebit = findViewById<TextView>(R.id.tvCheckDebit)
+
         // 1. Tangkap data kiriman dari intent sebelum ini
         val bookingId = intent.getIntExtra("BOOKING_ID", 0)
         val jenisKamar = intent.getStringExtra("JENIS_KAMAR") ?: "Kamar Hotel"
         val hargaMentah = intent.getIntExtra("HARGA_MENTAH", 0)
 
-        // 🔥 PELINDUNG INTENT: Ngecek semua kemungkinan nama KEY yang dikirim dari halaman lama.
-        // Kalau ternyata emang kosong/null, dia otomatis pakai nama dinamis "StayIn Purwokerto + Jenis Kamar".
+        // 🔥 PELINDUNG INTENT
         val namaHotel = intent.getStringExtra("NAMA_HOTEL")
             ?: intent.getStringExtra("nama_hotel")
             ?: intent.getStringExtra("nama")
             ?: "StayIn Purwokerto ($jenisKamar)"
 
-        // Cetak ke Logcat buat bahan pantauan lu pas debug
         Log.d("DEBUG_STAYIN", "Booking ID: $bookingId")
         Log.d("DEBUG_STAYIN", "Nama Hotel Terdeteksi: $namaHotel")
         Log.d("DEBUG_STAYIN", "Kategori Kamar: $jenisKamar")
@@ -63,15 +77,64 @@ class PembayaranActivity : AppCompatActivity() {
         tvTotalAtas.text = formatRupiah.format(totalPembayaran).replace("Rp", "Rp ")
         tvTotalBawah.text = formatRupiah.format(totalPembayaran).replace("Rp", "Rp ")
 
+
+        // --- LOGIKA PEMILIHAN METODE PEMBAYARAN ---
+        var selectedPaymentMethod = "Transfer Bank" // Default
+
+        fun resetAllPaymentMethods() {
+            // Reset Transfer Bank
+            layoutTransferBank.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            tvTextTransferBank.setTextColor(Color.parseColor("#000000"))
+            tvCheckTransferBank.visibility = View.GONE
+
+            // Reset E-Wallet
+            layoutEwallet.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            tvTextEwallet.setTextColor(Color.parseColor("#000000"))
+            tvCheckEwallet.visibility = View.GONE
+
+            // Reset Debit
+            layoutDebit.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            tvTextDebit.setTextColor(Color.parseColor("#000000"))
+            tvCheckDebit.visibility = View.GONE
+        }
+
+        layoutTransferBank.setOnClickListener {
+            resetAllPaymentMethods()
+            layoutTransferBank.setBackgroundColor(Color.parseColor("#E8F0FE"))
+            tvTextTransferBank.setTextColor(Color.parseColor("#1877F2"))
+            tvCheckTransferBank.visibility = View.VISIBLE
+            selectedPaymentMethod = "Transfer Bank"
+        }
+
+        layoutEwallet.setOnClickListener {
+            resetAllPaymentMethods()
+            layoutEwallet.setBackgroundColor(Color.parseColor("#E8F0FE"))
+            tvTextEwallet.setTextColor(Color.parseColor("#1877F2"))
+            tvCheckEwallet.visibility = View.VISIBLE
+            selectedPaymentMethod = "E-Wallet"
+        }
+
+        layoutDebit.setOnClickListener {
+            resetAllPaymentMethods()
+            layoutDebit.setBackgroundColor(Color.parseColor("#E8F0FE"))
+            tvTextDebit.setTextColor(Color.parseColor("#1877F2"))
+            tvCheckDebit.visibility = View.VISIBLE
+            selectedPaymentMethod = "Kartu Debit"
+        }
+        // --- AKHIR LOGIKA METODE PEMBAYARAN ---
+
+
         btnBack.setOnClickListener { finish() }
 
         // 2. Klik Tombol Bayar Sekarang
         btnBayar.setOnClickListener {
-            prosesPembayaranKeLaravel(bookingId, totalPembayaran, namaHotel)
+            // Mengirim selectedPaymentMethod ke dalam fungsi
+            prosesPembayaranKeLaravel(bookingId, totalPembayaran, namaHotel, selectedPaymentMethod)
         }
     }
 
-    private fun prosesPembayaranKeLaravel(bookingId: Int, totalAmount: Int, namaHotel: String) {
+    // Menambahkan parameter paymentMethod
+    private fun prosesPembayaranKeLaravel(bookingId: Int, totalAmount: Int, namaHotel: String, paymentMethod: String) {
         val sharedPref = getSharedPreferences("StayInPref", MODE_PRIVATE)
         val tokenMentah = sharedPref.getString("auth_token", "") ?: ""
 
@@ -82,14 +145,14 @@ class PembayaranActivity : AppCompatActivity() {
 
         val tokenLengkap = "Bearer $tokenMentah"
 
-        // Tembak API Laravel
-        ApiClient.instance.bayarBooking(tokenLengkap, bookingId, totalAmount, "Transfer Bank")
+        // Tembak API Laravel dengan paymentMethod dinamis
+        ApiClient.instance.bayarBooking(tokenLengkap, bookingId, totalAmount, paymentMethod)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@PembayaranActivity, "Pembayaran Berhasil!", Toast.LENGTH_SHORT).show()
 
-                        // Pindah ke ReviewActivity dengan membawa data nama hotel asli
+                        // Pindah ke PaymentSuccessActivity
                         val intent = Intent(this@PembayaranActivity, PaymentSuccessActivity::class.java)
                         intent.putExtra("NAMA_HOTEL", namaHotel)
                         intent.putExtra("USER_NAME", "Pelanggan StayIn")

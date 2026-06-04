@@ -276,6 +276,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <LinearLayout
+                android:id="@+id/layoutTransferBank"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="20dp"
@@ -284,11 +285,28 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="16dp"
                 android:elevation="1dp">
-                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="🏦 Transfer Bank" android:textColor="#1877F2" android:textStyle="bold"/>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textColor="#1877F2" android:textStyle="bold" android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/tvTextTransferBank"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="🏦 Transfer Bank"
+                    android:textColor="#1877F2"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvCheckTransferBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:textColor="#1877F2"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:visibility="visible"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutEwallet"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="20dp"
@@ -297,10 +315,28 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="16dp"
                 android:elevation="1dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💳 E-Wallet (DANA, OVO, dll)" android:textColor="#000000" android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvTextEwallet"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="💳 E-Wallet (DANA, OVO, dll)"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvCheckEwallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:textColor="#1877F2"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutDebit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="20dp"
@@ -309,7 +345,24 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="16dp"
                 android:elevation="1dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💳 Kartu Debit" android:textColor="#000000" android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvTextDebit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="💳 Kartu Debit"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvCheckDebit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:textColor="#1877F2"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
