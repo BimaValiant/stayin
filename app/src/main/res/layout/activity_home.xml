@@ -186,7 +186,7 @@
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
                             android:background="#FFE0B2"
-                            android:src="@android:drawable/ic_menu_gallery" />
+                            android:src="@drawable/stayin1" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -201,7 +201,7 @@
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
                             android:background="#B2DFDB"
-                            android:src="@android:drawable/ic_menu_gallery" />
+                            android:src="@drawable/stayin2" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </HorizontalScrollView>
